@@ -2,7 +2,7 @@ package interfaces;
 
 public interface BinarySearchTreeADT<T> extends BinaryTreeADT
 {
-    void addElement(T target);
+    void addElement(T target) throws Exception;
 
     T removeElement(T target);
 

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public interface BinaryTreeADT<T>
 {
     BinaryTreeNodeADT<T> getRoot(); // * Returns a reference to the Root or null if tree is empty
-    void setRoot(BinaryTreeNodeADT node); // * Set the Root of the tree
+    void setRoot(BinaryTreeNodeADT node) throws Exception; // * Set the Root of the tree
     boolean isEmpty(); // * Determines whether the tree is empty
     int size(); // * Returns the number of elements in the tree
     boolean contains(T element); // * Determines if an element is present in the tree
