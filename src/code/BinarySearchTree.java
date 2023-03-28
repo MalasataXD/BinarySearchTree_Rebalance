@@ -1,13 +1,11 @@
 package code;
 
 import interfaces.BinarySearchTreeADT;
-
-import javax.swing.tree.TreeNode;
 import java.util.ArrayList;
 
 public class  BinarySearchTree<T> implements BinarySearchTreeADT<T>
 {
-    private TreeNode root;
+    private TreeNode<T> root;
     private int size;
 
     // * Constructor
@@ -20,7 +18,7 @@ public class  BinarySearchTree<T> implements BinarySearchTreeADT<T>
     //      NOTE: ROOT METHODS
     //----------------------------------
 
-    @Override public TreeNode getRoot()
+    @Override public TreeNode<T> getRoot()
     {
         return null;
     }

@@ -1,6 +1,6 @@
 package interfaces;
 
-import javax.swing.tree.TreeNode;
+import code.TreeNode;
 import java.util.ArrayList;
 
 public interface BinaryTreeADT<T>
