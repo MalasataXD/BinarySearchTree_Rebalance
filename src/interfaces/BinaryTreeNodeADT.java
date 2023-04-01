@@ -1,6 +1,6 @@
 package interfaces;
 
-public interface BinaryTreeNodeADT<T> extends Comparable<T>
+public interface BinaryTreeNodeADT<T extends Comparable<T>> extends Comparable<T>
 {
     void setElement(T target);  // * Store the element in the Node
     T getElement(); // * Returns the element from the Node

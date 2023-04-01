@@ -2,7 +2,7 @@ package code;
 
 import interfaces.BinaryTreeNodeADT;
 
-public class TreeNode<T> implements BinaryTreeNodeADT<T> {
+public class TreeNode<T extends Comparable<T>> implements BinaryTreeNodeADT<T> {
     // # Element
     private T element;
 
@@ -20,7 +20,7 @@ public class TreeNode<T> implements BinaryTreeNodeADT<T> {
     {
         this.element = target;
     }
-    @Override public T getElement(T target)
+    @Override public T getElement()
     {
         return element;
     }
@@ -42,9 +42,8 @@ public class TreeNode<T> implements BinaryTreeNodeADT<T> {
         return right;
     }
 
-    // TODO: Implement a compareTo method... xD
-    @Override public int compareTo(T o)
+    @Override public int compareTo(T other)
     {
-        return 0;
+        return this.element.compareTo(other);
     }
 }
