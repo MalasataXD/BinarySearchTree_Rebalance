@@ -356,12 +356,41 @@ public class BinarySearchTree<T extends Comparable<T>> implements BinarySearchTr
         return size;
     }
 
-    @Override public ArrayList inOrder() {
-        return null;
+    // # DONE !
+    @Override public ArrayList inOrder()
+    {
+        ArrayList<T> inOrder = new ArrayList<>(); // # Start the list.
+        inOrderHelper((TreeNode<T>) root, inOrder);
+        return inOrder;
     }
+    // * HELPER METHOD
+    private void inOrderHelper(TreeNode<T> node, ArrayList<T> result) {
+        if(node != null)
+        {
+            inOrderHelper((TreeNode<T>) node.getLeftChild(),result); // # Continue from left child
+            result.add(node.getElement()); // * Add self to the result list.
+            inOrderHelper((TreeNode<T>) node.getRightChild(),result); // # Continue from right child
+        }
+
+    }
+    // # DONE !
     @Override public ArrayList preOrder() {
-        return null;
+        ArrayList<T> preOrder = new ArrayList<>(); // # Start the list.
+        preOrderHelper((TreeNode<T>) root, preOrder);
+        return preOrder;
     }
+    // * HELPER METHOD
+    private void preOrderHelper(TreeNode<T> node, ArrayList<T> result) {
+        if(node != null)
+        {
+            preOrderHelper((TreeNode<T>) node.getRightChild(),result); // # Continue from right child
+            result.add(node.getElement()); // * Add self to the result list.
+            preOrderHelper((TreeNode<T>) node.getLeftChild(),result); // # Continue from left child
+
+        }
+
+    }
+
     @Override public ArrayList postOrder() {
         return null;
     }
@@ -369,27 +398,50 @@ public class BinarySearchTree<T extends Comparable<T>> implements BinarySearchTr
         return null;
     }
 
-    // WIP
-    @Override public int height() {
-        if (root == null) {
+    // # DONE
+    @Override public int height()
+    {
+        // ! Check if Root is null --> Height = 0!
+        if (root == null)
+        {
             return 0;
         }
+
+        // # Height initialized
         int height = 0;
+
+        // * Make a queue to store all the nodes
         Queue<TreeNode<T>> queue = new LinkedList<>();
+        // * Start by adding Root to the queue.
         queue.offer(root);
-        while (!queue.isEmpty()) {
+
+        // ¤ Start count the height
+        while (!queue.isEmpty())
+        {
+            // # Levelsize stores the number of nodes in the queue at each level.
             int levelSize = queue.size();
-            for (int i = 0; i < levelSize; i++) {
+            // * Loop through all the nodes in the queue.
+            for (int i = 0; i < levelSize; i++)
+            {
+                // # Take out a node from the queue.
                 TreeNode<T> node = queue.poll();
-                if (node.getLeftChild() != null) {
+                // # Has left child?
+                if (node.getLeftChild() != null)
+                {
+                    // * Add the child to the queue!
                     queue.offer((TreeNode<T>) node.getLeftChild());
                 }
-                if (node.getRightChild() != null) {
+                // # Has right child?
+                if (node.getRightChild() != null)
+                {
+                    // * Add the child to the queue
                     queue.offer((TreeNode<T>) node.getRightChild());
                 }
             }
+            // ! Increase the height by 1
             height++;
         }
+        // # Return the counted height.
         return height;
     }
 }

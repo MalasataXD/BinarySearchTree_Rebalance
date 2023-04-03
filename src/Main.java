@@ -21,9 +21,13 @@ public class Main {
         integerTree.addElement(9);
         System.out.println("SIZE: " + integerTree.size());
         System.out.println("ISEMPTY: " + integerTree.isEmpty());
+        printer.printTree((TreeNode) integerTree.getRoot());
+        System.out.println("\n");
         System.out.println("CONTAINS 2: " + integerTree.contains(2));
         System.out.println("HEIGHT: " + integerTree.height());
-        printer.printTree((TreeNode) integerTree.getRoot());
+        System.out.println("INORDER: " + integerTree.inOrder());
+        System.out.println("PREORDER: " + integerTree.preOrder());
+
 
 
 
