@@ -19,7 +19,6 @@ public class BinarySearchTree<T extends Comparable<T>> implements BinarySearchTr
         // ! EMPTY
     }
 
-    // # DONE !
     @Override public void addElement(T target) throws Exception {
         // ! Check for NULL
         if(target == null) {
@@ -80,7 +79,6 @@ public class BinarySearchTree<T extends Comparable<T>> implements BinarySearchTr
         }
     }
 
-    // # DONE !
     @Override public T removeElement(T target) throws Exception {
         // ! Check for Null?
         if(target == null)
@@ -138,8 +136,7 @@ public class BinarySearchTree<T extends Comparable<T>> implements BinarySearchTr
     }
 
     // ! Remove Leaf node
-    private void removeLeafNode(TreeNode<T> parent, TreeNode<T> nodeToRemove)
-    {
+    private void removeLeafNode(TreeNode<T> parent, TreeNode<T> nodeToRemove) {
         // # Has Parent?
         if(parent == null)
         {
@@ -157,9 +154,9 @@ public class BinarySearchTree<T extends Comparable<T>> implements BinarySearchTr
             parent.addRightChild(null);
         }
     }
+
     // ! Remove with One child
-    private void removeOneChild(TreeNode<T> parent, TreeNode<T> nodeToRemove)
-    {
+    private void removeOneChild(TreeNode<T> parent, TreeNode<T> nodeToRemove) {
         // # Check for child.
         TreeNode<T> child = (TreeNode<T>) (nodeToRemove.getLeftChild() == null? nodeToRemove.getRightChild() : nodeToRemove.getLeftChild());
 
@@ -180,9 +177,9 @@ public class BinarySearchTree<T extends Comparable<T>> implements BinarySearchTr
             parent.addRightChild(child);
         }
     }
+
     // ! Remove with Two children.
-    private void removeTwoChildren(TreeNode<T> nodeToRemove)
-    {
+    private void removeTwoChildren(TreeNode<T> nodeToRemove) {
         TreeNode<T> parent = nodeToRemove; // # Node we want to remove.
         // * We need to take the right child to ensure, that tree is maintained after the removal.
         TreeNode<T> successor = (TreeNode<T>) nodeToRemove.getRightChild();
@@ -207,9 +204,7 @@ public class BinarySearchTree<T extends Comparable<T>> implements BinarySearchTr
         }
     }
 
-    // # DONE!
-    @Override public boolean contains(Comparable element)
-    {
+    @Override public boolean contains(Comparable element) {
         TreeNode<T> current = root; // * Start from Root
         boolean hasFound = false;
         boolean isDoneLooking = false;
@@ -258,7 +253,6 @@ public class BinarySearchTree<T extends Comparable<T>> implements BinarySearchTr
         return hasFound;
     }
 
-    // # DONE !
     @Override public T removeMin() {
         TreeNode<T> parent = null;
         TreeNode<T> current = (TreeNode<T>) getRoot();
@@ -284,7 +278,6 @@ public class BinarySearchTree<T extends Comparable<T>> implements BinarySearchTr
         return current.getElement();
     }
 
-    // # DONE !
     @Override public T removeMax() {
         TreeNode<T> parent = null;
         TreeNode<T> current = (TreeNode<T>) getRoot();
@@ -310,7 +303,6 @@ public class BinarySearchTree<T extends Comparable<T>> implements BinarySearchTr
         return current.getElement();
     }
 
-    // # DONE !
     @Override public T findMin() {
         TreeNode<T> current = (TreeNode<T>) getRoot();
 
@@ -323,7 +315,6 @@ public class BinarySearchTree<T extends Comparable<T>> implements BinarySearchTr
         return current.getElement();
     }
 
-    // # DONE !
     @Override public T findMax() {
         TreeNode<T> current = (TreeNode<T>) getRoot();
 
@@ -336,33 +327,28 @@ public class BinarySearchTree<T extends Comparable<T>> implements BinarySearchTr
         return current.getElement();
     }
 
-    // # DONE!
     @Override public BinaryTreeNodeADT getRoot() {
         return root;
     }
 
-    // # DONE!
     @Override public void setRoot(BinaryTreeNodeADT node) {
         this.root = (TreeNode) node;
     }
 
-    // # DONE
     @Override public boolean isEmpty() {
         return root == null;
     }
 
-    // # DONE
     @Override public int size() {
         return size;
     }
 
-    // # DONE !
-    @Override public ArrayList inOrder()
-    {
+    @Override public ArrayList inOrder() {
         ArrayList<T> inOrder = new ArrayList<>(); // # Start the list.
-        inOrderHelper((TreeNode<T>) root, inOrder);
+        inOrderHelper(root, inOrder);
         return inOrder;
     }
+
     // * HELPER METHOD
     private void inOrderHelper(TreeNode<T> node, ArrayList<T> result) {
         if(node != null)
@@ -373,10 +359,10 @@ public class BinarySearchTree<T extends Comparable<T>> implements BinarySearchTr
         }
 
     }
-    // # DONE !
+
     @Override public ArrayList preOrder() {
         ArrayList<T> preOrder = new ArrayList<>(); // # Start the list.
-        preOrderHelper((TreeNode<T>) root, preOrder);
+        preOrderHelper(root, preOrder);
         return preOrder;
     }
     // * HELPER METHOD
@@ -388,17 +374,53 @@ public class BinarySearchTree<T extends Comparable<T>> implements BinarySearchTr
             preOrderHelper((TreeNode<T>) node.getLeftChild(),result); // # Continue from left child
 
         }
-
     }
 
-    @Override public ArrayList postOrder() {
-        return null;
+    @Override public ArrayList postOrder()
+    {
+        ArrayList<T> postOrder = new ArrayList<>(); // # Start the list
+        postOrderHelper(root, postOrder);
+        return postOrder;
     }
-    @Override public ArrayList levelOrder() {
-        return null;
+    // * HELPER METHOD
+    private void postOrderHelper(TreeNode<T> node, ArrayList<T> result)
+    {
+        if(node != null)
+        {
+            postOrderHelper((TreeNode<T>) node.getLeftChild(),result); // # Continue from left child
+            postOrderHelper((TreeNode<T>) node.getRightChild(), result); // # Continue from right child
+            result.add(node.getElement()); // * Add self to the result list.
+        }
     }
 
-    // # DONE
+    @Override public ArrayList levelOrder()
+    {
+        ArrayList<T> levelOrder = new ArrayList<>();
+        levelOrderHelper(root,levelOrder);
+        return levelOrder;
+    }
+    // * HELPER METHOD
+    private void levelOrderHelper(TreeNode<T> node, ArrayList<T> result)
+    {
+        Queue<TreeNode<T>> queue = new LinkedList<>();
+        queue.offer(node);
+
+        while(!queue.isEmpty())
+        {
+            TreeNode<T> dequeued = queue.poll(); // * Take out a node from the queue.
+            // # Check for children.
+            if(dequeued.getLeftChild() != null)
+            {
+                queue.offer((TreeNode<T>) dequeued.getLeftChild());
+            }
+            if(dequeued.getRightChild() != null)
+            {
+                queue.offer((TreeNode<T>) dequeued.getRightChild());
+            }
+            result.add(dequeued.getElement()); // * Add it to the result list
+        }
+    }
+
     @Override public int height()
     {
         // ! Check if Root is null --> Height = 0!

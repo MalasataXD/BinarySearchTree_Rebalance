@@ -27,6 +27,9 @@ public class Main {
         System.out.println("HEIGHT: " + integerTree.height());
         System.out.println("INORDER: " + integerTree.inOrder());
         System.out.println("PREORDER: " + integerTree.preOrder());
+        System.out.println("POSTORDER: " + integerTree.postOrder());
+
+        System.out.println("LEVELORDER: " + integerTree.levelOrder());
 
 
 
