@@ -1,10 +1,10 @@
 package interfaces;
 
-public interface BinarySearchTreeADT<T> extends BinaryTreeADT
+public interface BinarySearchTreeADT<T extends Comparable<T>> extends BinaryTreeADT
 {
-    void addElement(T target);
+    void addElement(T target) throws Exception;
 
-    T removeElement(T target);
+    T removeElement(T target) throws Exception;
 
     T removeMin();
 
@@ -13,6 +13,4 @@ public interface BinarySearchTreeADT<T> extends BinaryTreeADT
     T findMin();
 
     T findMax();
-
-
 }

@@ -1,9 +1,7 @@
 package interfaces;
-
-import code.TreeNode;
 import java.util.ArrayList;
 
-public interface BinaryTreeADT<T>
+public interface BinaryTreeADT<T extends Comparable<T>>
 {
     BinaryTreeNodeADT<T> getRoot(); // * Returns a reference to the Root or null if tree is empty
     void setRoot(BinaryTreeNodeADT node); // * Set the Root of the tree
