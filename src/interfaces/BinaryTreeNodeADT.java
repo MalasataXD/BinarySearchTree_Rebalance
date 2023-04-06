@@ -1,5 +1,7 @@
 package interfaces;
 
+import code.TreeNode;
+
 public interface BinaryTreeNodeADT<T extends Comparable<T>> extends Comparable<T>
 {
     void setElement(T target);  // * Store the element in the Node

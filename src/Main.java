@@ -2,8 +2,10 @@ import code.BinarySearchTree;
 import code.BinaryTreePrint;
 import code.TreeNode;
 
-public class Main {
-    public static void main(String[] args) throws Exception {
+public class Main
+{
+    public static void main(String[] args) throws Exception
+    {
         // ¤ PRINTER
         BinaryTreePrint printer = new BinaryTreePrint();
         // # TREE
@@ -28,8 +30,12 @@ public class Main {
         System.out.println("INORDER: " + integerTree.inOrder());
         System.out.println("PREORDER: " + integerTree.preOrder());
         System.out.println("POSTORDER: " + integerTree.postOrder());
-
         System.out.println("LEVELORDER: " + integerTree.levelOrder());
+        integerTree.removeElement(6);
+        integerTree.rebalance();
+        printer.printTree((TreeNode) integerTree.getRoot());
+        System.out.println("\n");
+        System.out.println("HEIGHT: " + integerTree.height());
 
 
 

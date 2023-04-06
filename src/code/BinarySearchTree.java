@@ -5,6 +5,7 @@ import interfaces.BinaryTreeNodeADT;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 public class BinarySearchTree<T extends Comparable<T>> implements BinarySearchTreeADT<T>
@@ -131,7 +132,7 @@ public class BinarySearchTree<T extends Comparable<T>> implements BinarySearchTr
         }
 
 
-
+        size--;
         return (T) current.getElement();
     }
 
@@ -204,7 +205,16 @@ public class BinarySearchTree<T extends Comparable<T>> implements BinarySearchTr
         }
     }
 
-    @Override public boolean contains(Comparable element) {
+    @Override public boolean contains(Comparable element)
+    {
+        // ! Check if tree has elements
+        if(isEmpty())
+        {
+            // # If not, it doesn't contain anything.
+            return false;
+        }
+
+
         TreeNode<T> current = root; // * Start from Root
         boolean hasFound = false;
         boolean isDoneLooking = false;
@@ -254,6 +264,12 @@ public class BinarySearchTree<T extends Comparable<T>> implements BinarySearchTr
     }
 
     @Override public T removeMin() {
+        // ! Check if tree is empty --> RETURN NULL!
+        if(isEmpty())
+        {
+            return null;
+        }
+
         TreeNode<T> parent = null;
         TreeNode<T> current = (TreeNode<T>) getRoot();
 
@@ -279,6 +295,12 @@ public class BinarySearchTree<T extends Comparable<T>> implements BinarySearchTr
     }
 
     @Override public T removeMax() {
+        // ! Check if tree is empty --> RETURN NULL!
+        if(isEmpty())
+        {
+            return null;
+        }
+
         TreeNode<T> parent = null;
         TreeNode<T> current = (TreeNode<T>) getRoot();
 
@@ -304,6 +326,12 @@ public class BinarySearchTree<T extends Comparable<T>> implements BinarySearchTr
     }
 
     @Override public T findMin() {
+        // ! Check if tree is empty --> RETURN NULL!
+        if(isEmpty())
+        {
+            return null;
+        }
+
         TreeNode<T> current = (TreeNode<T>) getRoot();
 
         while(current.getLeftChild() != null)
@@ -316,6 +344,12 @@ public class BinarySearchTree<T extends Comparable<T>> implements BinarySearchTr
     }
 
     @Override public T findMax() {
+
+        // ! Check if tree is empty --> RETURN NULL!
+        if(isEmpty())
+        {
+            return null;
+        }
         TreeNode<T> current = (TreeNode<T>) getRoot();
 
         while(current.getRightChild() != null)
@@ -465,5 +499,59 @@ public class BinarySearchTree<T extends Comparable<T>> implements BinarySearchTr
         }
         // # Return the counted height.
         return height;
+    }
+
+    // ! REBALANCE METHOD
+    public void rebalance()
+    {
+        if(isEmpty())
+        {
+            // * Tree is empty, nothing to rebalance
+            return;
+        }
+
+        List<TreeNode<T>> nodes = new ArrayList<>(); // # Used to store the nodes
+        storeBTSNodes(root,nodes); // # Balance then tree
+
+        root = buildTreeUtil(nodes,0,nodes.size()-1);
+    }
+
+    // * HELPER METHOD
+    private void storeBTSNodes(TreeNode<T> node, List<TreeNode<T>> nodes)
+    {
+        // ! Is NULL?
+        if(node == null)
+        {
+            return; // ! If node is null, stop.
+        }
+
+        storeBTSNodes((TreeNode<T>) node.getLeftChild(),nodes); // # Store the left side
+        nodes.add(node); // * Store self
+        storeBTSNodes((TreeNode<T>) node.getRightChild(),nodes); // # Store the right side
+    }
+
+    // * HELPER METHOD
+    private TreeNode<T> buildTreeUtil(List<TreeNode<T>> nodes, int start, int end)
+    {
+        // # Check if the start index is greater than the end index
+        if(start > end)
+        {
+            // ! If it is, return null as something went wrong
+            return null;
+        }
+
+        // # Find the middle index between the start and end index
+        int mid = (start + end)/2;
+
+        // # Create a new tree node with the value at the middle index
+        TreeNode<T> node = nodes.get(mid);
+
+        // * Recursively build the left subtree of the new node
+        node.addLeftChild(buildTreeUtil(nodes, start, mid-1));
+
+        // * Recursively build the right subtree of the new node
+        node.addRightChild(buildTreeUtil(nodes, mid+1, end));
+
+        return node; // # Return the new tree node with the built subtrees
     }
 }
