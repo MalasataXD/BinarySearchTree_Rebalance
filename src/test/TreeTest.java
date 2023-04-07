@@ -4,6 +4,8 @@ import code.BinarySearchTree;
 import code.TreeNode;
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.Assert.*;
 
 public class TreeTest
@@ -114,7 +116,7 @@ public class TreeTest
         tree.addElement(1);
 
         // # ACT & ASSERT
-        assertFalse(tree.contains(1));
+        assertTrue(tree.contains(1));
     }
     @Test public void ContainsOneInTreeWithElementsButNOTOne() throws Exception {
         // # ARRANGE
@@ -174,7 +176,7 @@ public class TreeTest
         // # ASSERT
         assertEquals(1,min);
     }
-    @Test public void removeMinAndCheckSize() throws Exception {
+    @Test public void removeMinAndCheckForMin() throws Exception {
         // # ARRANGE
         tree = new BinarySearchTree<>();
         tree.addElement(5);
@@ -187,7 +189,7 @@ public class TreeTest
         tree.addElement(9);
 
         // # ACT & ASSERT
-        tree.removeMax();
+        tree.removeMin();
         assertFalse(tree.contains(1));
     }
 
@@ -225,7 +227,7 @@ public class TreeTest
         // # ASSERT
         assertEquals(9,max);
     }
-    @Test public void removeMaxAndCheckSize() throws Exception {
+    @Test public void removeMaxAndCheckforMax() throws Exception {
         // # ARRANGE
         tree = new BinarySearchTree<>();
         tree.addElement(5);
@@ -310,10 +312,276 @@ public class TreeTest
         assertEquals(5,tree.getRoot().getElement());
     }
 
+    // # INORDER TRAVERSAL
+    @Test public void inOrderTraversalWithZeroElements() {
+        // # ARRANGE
+        ArrayList<Integer> result = new ArrayList<>();
 
-    // TODO: REBALANCE TEST
 
-    // TODO: TRAVERSAL TEST
+        // * Tree
+        tree = new BinarySearchTree<>();
+
+        // # ACT
+        ArrayList inOrder = tree.inOrder();
+
+        // # ASSERT
+        assertEquals(result,inOrder);
+    }
+    @Test public void inOrderTraversalWithOneElement() throws Exception {
+        // # ARRANGE
+        ArrayList<Integer> result = new ArrayList<>();
+        result.add(1);
+
+        // * Tree
+        tree = new BinarySearchTree<>();
+        tree.addElement(1);
+
+        // # ACT
+        ArrayList inOrder = tree.inOrder();
+
+        // # ASSERT
+        assertEquals(result,inOrder);
+    }
+    @Test public void inOrderTraversalWithMultipleElements() throws Exception {
+        // # ARRANGE
+        ArrayList<Integer> result = new ArrayList<>();
+        result.add(1);
+        result.add(2);
+        result.add(3);
+        result.add(4);
+        result.add(5);
+        result.add(6);
+
+        // * Tree
+        tree = new BinarySearchTree<>();
+        tree.addElement(1);
+        tree.addElement(3);
+        tree.addElement(2);
+        tree.addElement(4);
+        tree.addElement(6);
+        tree.addElement(5);
+
+        // # ACT
+        ArrayList inOrder = tree.inOrder();
+
+        // # ASSERT
+        assertEquals(result,inOrder);
+    }
+
+    // # PREORDER TRAVERSAL
+    @Test public void preOrderTraversalWithZeroElements() {
+        // # ARRANGE
+        ArrayList<Integer> result = new ArrayList<>();
 
 
+        // * Tree
+        tree = new BinarySearchTree<>();
+
+        // # ACT
+        ArrayList preOrder = tree.preOrder();
+
+        // # ASSERT
+        assertEquals(result,preOrder);
+    }
+    @Test public void preOrderTraversalWithOneElement() throws Exception {
+        // # ARRANGE
+        ArrayList<Integer> result = new ArrayList<>();
+        result.add(1);
+
+        // * Tree
+        tree = new BinarySearchTree<>();
+        tree.addElement(1);
+
+        // # ACT
+        ArrayList preOrder = tree.preOrder();
+
+        // # ASSERT
+        assertEquals(result,preOrder);
+    }
+    @Test public void preOrderTraversalWithMultipleElements() throws Exception {
+        // # ARRANGE
+        ArrayList<Integer> result = new ArrayList<>();
+        result.add(6);
+        result.add(5);
+        result.add(4);
+        result.add(3);
+        result.add(2);
+        result.add(1);
+
+        // * Tree
+        tree = new BinarySearchTree<>();
+        tree.addElement(1);
+        tree.addElement(3);
+        tree.addElement(2);
+        tree.addElement(4);
+        tree.addElement(6);
+        tree.addElement(5);
+
+        // # ACT
+        ArrayList preOrder = tree.preOrder();
+
+        // # ASSERT
+        assertEquals(result,preOrder);
+    }
+
+    // # POSTORDER TRAVERSAL
+    @Test public void postOrderTraversalWithZeroElements() {
+        // # ARRANGE
+        ArrayList<Integer> result = new ArrayList<>();
+
+
+        // * Tree
+        tree = new BinarySearchTree<>();
+
+        // # ACT
+        ArrayList postOrder = tree.postOrder();
+
+        // # ASSERT
+        assertEquals(result,postOrder);
+    }
+    @Test public void postOrderTraversalWithOneElement() throws Exception {
+        // # ARRANGE
+        ArrayList<Integer> result = new ArrayList<>();
+        result.add(1);
+
+        // * Tree
+        tree = new BinarySearchTree<>();
+        tree.addElement(1);
+
+        // # ACT
+        ArrayList postOrder = tree.postOrder();
+
+        // # ASSERT
+        assertEquals(result,postOrder);
+    }
+    @Test public void postOrderTraversalWithMultipleElements() throws Exception {
+        // # ARRANGE
+        ArrayList<Integer> result = new ArrayList<>();
+        result.add(2);
+        result.add(5);
+        result.add(6);
+        result.add(4);
+        result.add(3);
+        result.add(1);
+
+        // * Tree
+        tree = new BinarySearchTree<>();
+        tree.addElement(1);
+        tree.addElement(3);
+        tree.addElement(2);
+        tree.addElement(4);
+        tree.addElement(6);
+        tree.addElement(5);
+
+        // # ACT
+        ArrayList postOrder = tree.postOrder();
+
+        // # ASSERT
+        assertEquals(result,postOrder);
+    }
+    // # LEVELORDER TRAVERSAL
+    @Test public void levelOrderTraversalWithZeroElements() {
+        // # ARRANGE
+        ArrayList<Integer> result = new ArrayList<>();
+
+
+        // * Tree
+        tree = new BinarySearchTree<>();
+
+        // # ACT
+        ArrayList levelOrder = tree.levelOrder();
+
+        // # ASSERT
+        assertEquals(result,levelOrder);
+    }
+    @Test public void levelOrderTraversalWithOneElement() throws Exception {
+        // # ARRANGE
+        ArrayList<Integer> result = new ArrayList<>();
+        result.add(1);
+
+        // * Tree
+        tree = new BinarySearchTree<>();
+        tree.addElement(1);
+
+        // # ACT
+        ArrayList levelOrder = tree.levelOrder();
+
+        // # ASSERT
+        assertEquals(result,levelOrder);
+    }
+    @Test public void levelOrderTraversalWithMultipleElements() throws Exception {
+        // # ARRANGE
+        ArrayList<Integer> result = new ArrayList<>();
+        result.add(1);
+        result.add(3);
+        result.add(2);
+        result.add(4);
+        result.add(6);
+        result.add(5);
+
+        // * Tree
+        tree = new BinarySearchTree<>();
+        tree.addElement(1);
+        tree.addElement(3);
+        tree.addElement(2);
+        tree.addElement(4);
+        tree.addElement(6);
+        tree.addElement(5);
+
+        // # ACT
+        ArrayList levelOrder = tree.levelOrder();
+
+        // # ASSERT
+        assertEquals(result,levelOrder);
+    }
+
+    // # REBALANCE TEST
+    @Test public void rebalanceHeavyRightSized() throws Exception {
+        // # ARRANGE
+        tree = new BinarySearchTree<>();
+        tree.addElement(1);
+        tree.addElement(2);
+        tree.addElement(3);
+        tree.addElement(4);
+        tree.addElement(5);
+        tree.addElement(6);
+
+        // # ACT
+        tree.rebalance();
+
+
+        assertEquals(3,tree.height());
+    }
+    @Test public void rebalanceHeavyLeftSized() throws Exception {
+        // # ARRANGE
+        tree = new BinarySearchTree<>();
+        tree.addElement(6);
+        tree.addElement(5);
+        tree.addElement(4);
+        tree.addElement(3);
+        tree.addElement(2);
+        tree.addElement(1);
+
+        // # ACT
+        tree.rebalance();
+
+
+        assertEquals(3,tree.height());
+    }
+    @Test public void rebalanceMixed() throws Exception {
+        // # ARRANGE
+        tree = new BinarySearchTree<>();
+        tree.addElement(5);
+        tree.addElement(3);
+        tree.addElement(7);
+        tree.addElement(2);
+        tree.addElement(1);
+        tree.addElement(9);
+
+        // # ACT
+        tree.rebalance();
+
+        // # ASSERT
+        assertEquals(3,tree.height());
+    }
 }

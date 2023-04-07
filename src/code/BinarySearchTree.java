@@ -442,6 +442,13 @@ public class BinarySearchTree<T extends Comparable<T>> implements BinarySearchTr
         while(!queue.isEmpty())
         {
             TreeNode<T> dequeued = queue.poll(); // * Take out a node from the queue.
+
+            // ! If there are no nodes in the queue
+            if(dequeued == null)
+            {
+                break; // ! BREAK THE LOOP!
+            }
+
             // # Check for children.
             if(dequeued.getLeftChild() != null)
             {

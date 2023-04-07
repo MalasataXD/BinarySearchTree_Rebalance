@@ -6,8 +6,10 @@ public class Main
 {
     public static void main(String[] args) throws Exception
     {
+
         // ¤ PRINTER
         BinaryTreePrint printer = new BinaryTreePrint();
+        /*
         // # TREE
         BinarySearchTree<Integer> integerTree = new BinarySearchTree<>();
         System.out.println("[RUNNING]");
@@ -36,9 +38,23 @@ public class Main
         printer.printTree((TreeNode) integerTree.getRoot());
         System.out.println("\n");
         System.out.println("HEIGHT: " + integerTree.height());
+        */
 
-
-
+        BinarySearchTree<Integer> tree = new BinarySearchTree<>();
+        tree.addElement(5);
+        tree.addElement(3);
+        tree.addElement(7);
+        tree.addElement(2);
+        tree.addElement(1);
+        tree.addElement(9);
+        System.out.println(tree.height());
+        printer.printTree((TreeNode) tree.getRoot());
+        System.out.println("\n");
+        System.out.println("HEIGHT: " + tree.height());
+        tree.rebalance();
+        printer.printTree((TreeNode) tree.getRoot());
+        System.out.println("\n");
+        System.out.println("HEIGHT: " +  tree.height());
 
 
     }
